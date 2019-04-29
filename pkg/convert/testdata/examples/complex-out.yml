@@ -1,0 +1,53 @@
+---
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: mkdir -p my_workspace
+      - run: echo "Hello Build" > my_workspace/echo-output
+      - run: sleep 5
+      - persist_to_workspace:
+          root: my_workspace
+          paths:
+            - echo-output
+  testa:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - attach_workspace:
+          at: my_workspace
+      - run: echo "Hello Test A"
+      - run: cat my_workspace/echo-output
+      - run: sleep 5
+  testb:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "Hello Test B"
+      - run: sleep 5
+  deploy:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "Hello Deploy"
+      - run: sleep 5
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - testa:
+          requires:
+            - build
+      - testb:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - testa
+            - testb
