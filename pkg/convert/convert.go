@@ -216,6 +216,6 @@ workflows:
         {{- end -}}
       {{- end -}}
   {{- end -}}
-{{- end -}}
+{{- end }}
 `
 )

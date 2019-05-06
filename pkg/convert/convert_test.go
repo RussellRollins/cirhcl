@@ -55,8 +55,6 @@ func TestConvertExamples(t *testing.T) {
 			got := gotBuffer.String()
 
       assert.Equal(t, want, got, "The converted YAML should equal the expected YAML.")
-
-      fmt.Println(got)
 		})
 	}
 }
