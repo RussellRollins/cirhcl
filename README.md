@@ -32,7 +32,7 @@ Use cirhcl to convert that to a YAML version:
 
 ```
 cirhcl config.hcl
-cat config.yaml
+cat config.yml
 ```
 
 ## Supported Features

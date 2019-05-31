@@ -34,7 +34,7 @@ func run() error {
 	defer input.Close()
 
 	noExtension := strings.TrimSuffix(input.Name(), filepath.Ext(input.Name()))
-	outName := fmt.Sprintf("%s.yaml", noExtension)
+	outName := fmt.Sprintf("%s.yml", noExtension)
 
 	output, err := os.Create(outName)
 	if err != nil {
